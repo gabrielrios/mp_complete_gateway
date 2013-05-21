@@ -3,6 +3,8 @@
 MarkePress Complete Gateway Plugin
 Author: Gabriel Rios (gabrielfalcaorios@gmail.com);
 */
+include 'usaepay/usaepay.php';
+
 class MP_Complete_Gateway extends MP_Gateway_API {
 
   //private gateway slug. Lowercase alpha (a-z) and dashes (-) only please!
@@ -487,7 +489,7 @@ function _get_card_type($number) {
       $payment_info['status'][$timestamp] = "paid";
       $payment_info['total'] = $total;
       $payment_info['currency'] = "USD"; // Authorize.net only supports USD transactions
-      $payment_info['transaction_id'] = $tran->authcode();
+      $payment_info['transaction_id'] = $tran->authcode;
 
       //succesful payment, create our order now
       $result = $mp->create_order($_SESSION['mp_order'], $cart, $shipping_info, $payment_info, $paid);
