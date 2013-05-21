@@ -51,6 +51,14 @@ class MP_Complete_Gateway extends MP_Gateway_API {
     if (isset($settings['gateways']['complete_gateway']['transaction_key'])) {
       $this->transaction_key = $settings['gateways']['complete_gateway']['transaction_key'];
     }
+
+    if (isset($settings['gateways']['complete_gateway']['mode'])) {
+      if ($settings['gateways']['complete_gateway']['mode'] == 'sandbox') {
+        $this->usesandbox = true;
+      } else {
+        $this->usesandbox = false;
+      }
+    } else { $this->usesandbox = false;
   }
 
   /**
@@ -448,7 +456,7 @@ function _get_card_type($number) {
 
     // Send request to sandbox server not production.  Make sure to comment or remove this line before
     //  putting your code into production
-    $tran->usesandbox=true;
+    $tran->usesandbox = $this->usesandbox;
 
     $tran->card = $_SESSION['card_num'];
     $tran->exp = $_SESSION['exp_month'] . $_SESSION['exp_year'];
