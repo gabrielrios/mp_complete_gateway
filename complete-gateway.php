@@ -58,7 +58,7 @@ class MP_Complete_Gateway extends MP_Gateway_API {
       } else {
         $this->usesandbox = false;
       }
-    } else { $this->usesandbox = false;
+    } else { $this->usesandbox = false; }
   }
 
   /**
